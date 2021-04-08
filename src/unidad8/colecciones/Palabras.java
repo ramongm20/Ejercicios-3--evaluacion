@@ -1,23 +1,44 @@
 package unidad8.colecciones;
-
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 import java.util.TreeSet;
 
-public class Palabras extends TreeSet<String> {
-
-	private static final long serialVersionUID = 1L;
+public class Palabras {
+	
+	private Map<Integer, Set<String>> mapa;
+	
 	public Palabras() {
-		super();
+		mapa = new TreeMap<>();
 	}
-public Palabras (String palabras) {
-	super();
-	for (String p: palabras.split(" "))
-		this.add(p);
-}
-	public void addPalabra(String p) {
-		this.add(p);
+	
+	public Palabras(String texto) {
+		addPalabras(texto);
 	}
-	public void addCadenaPalabras(String palabras) {
-		for (String p: palabras.split(" "))
-		this.add(p);
+	
+	private void add(String palabra) {
+		int l = palabra.length();
+		Set<String> palabras = mapa.get(l);
+		if (palabras == null) {
+			palabras = new TreeSet<>();
+			mapa.put(l, palabras);
+		}
+		palabras.add(palabra);
+	}
+	
+	public void addPalabras(String texto) {
+		for(String palabra: texto.split("\\P{L}+"))
+			add(palabra);
+	}
+	
+	public boolean contiene(String palabra) {
+		try {
+			return mapa.get(palabra.length()).contains(palabra);
+		} catch (NullPointerException e) {
+			return false;
+		}
+	}
+	public Set<String> listaPalabras(int n) {
+		return mapa.get(n);
 	}
 }
