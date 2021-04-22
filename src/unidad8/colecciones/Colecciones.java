@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.PriorityQueue;
+import java.util.Queue;
 import java.util.Set;
 
 public class Colecciones {
@@ -35,7 +37,7 @@ public class Colecciones {
 
 //	return lista.stream().collect(HashMap<String, Integer>::new, (a, b) -> a.put(b, a.containsKey(b) ? a.get(b) + 1 : 1), (a, b) -> {}).values().stream().anyMatch(value -> value >= 3);
 	}
-	
+
 	public static void duplicar(Deque<Integer> pila) {
 		Deque<Integer> aux = new LinkedList<>();
 		while (!pila.isEmpty())
@@ -47,4 +49,11 @@ public class Colecciones {
 		}
 	}
 
+	static void negativosAbajoPositivosArriba(Deque<Integer> pila) {
+		Queue<Integer> aux = new PriorityQueue<>();
+		while (!pila.isEmpty())
+			aux.add(pila.pop());
+		while (!aux.isEmpty())
+			pila.push(aux.poll());
+	}
 }
