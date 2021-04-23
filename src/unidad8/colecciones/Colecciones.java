@@ -1,5 +1,6 @@
 package unidad8.colecciones;
 
+import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -85,4 +86,17 @@ public class Colecciones {
 		return moda;
 	}
 
+	static void eliminarSiMayoresEncima(Deque<Integer> pila) {
+		Deque<Integer> aux = new ArrayDeque<>();
+
+		while (!pila.isEmpty()) {
+			Integer tope = pila.pop();
+			aux.push(tope);
+			while (!pila.isEmpty() && pila.peek() < tope)
+				pila.pop();
+		}
+		while (!aux.isEmpty())
+			pila.push(aux.pop());
+
+	}
 }
