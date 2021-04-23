@@ -135,4 +135,9 @@ public class Colecciones {
 		return edad.peek();
 	}
 
+	static int contarComunes(List<Integer> l1, List<Integer> l2) {
+		l1.retainAll(l2);
+		return (int) l1.stream().distinct().count();
+	}
+
 }
