@@ -2,9 +2,11 @@ package unidad8.colecciones;
 
 import java.util.Deque;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Set;
@@ -56,4 +58,31 @@ public class Colecciones {
 		while (!aux.isEmpty())
 			pila.push(aux.poll());
 	}
+
+	static int moda(List<Integer> lista) {
+		if (lista.isEmpty())
+			return 0;
+
+		Map<Integer, Integer> mapa = new HashMap<>();
+		for (Integer n : lista)
+			if (mapa.containsKey(n))
+				mapa.put(n, mapa.get(n) + 1);
+			else
+				mapa.put(n, 1);
+
+		int repeticiones = 0;
+		int moda = 0;
+
+		Iterator<Entry<Integer, Integer>> iter = mapa.entrySet().iterator();
+
+		while (iter.hasNext()) {
+			Entry<Integer, Integer> e = iter.next();
+			if (e.getValue() > repeticiones) {
+				moda = e.getKey();
+				repeticiones = e.getValue();
+			}
+		}
+		return moda;
+	}
+
 }
