@@ -11,6 +11,7 @@ import java.util.Map.Entry;
 import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Set;
+import java.util.TreeMap;
 
 public class Colecciones {
 
@@ -97,6 +98,16 @@ public class Colecciones {
 		}
 		while (!aux.isEmpty())
 			pila.push(aux.pop());
+	}
 
+	static Map<String, Integer> interseccion(Map<String, Integer> m1, Map<String, Integer> m2) {
+		Set<Map.Entry<String, Integer>> s1 = m1.entrySet();
+		Set<Map.Entry<String, Integer>> s2 = m2.entrySet();
+		Map<String, Integer> m3 = new TreeMap<>();
+
+		s1.retainAll(s2);
+		s1.forEach(e -> m3.put(e.getKey(), e.getValue()));
+
+		return m3;
 	}
 }
