@@ -110,4 +110,29 @@ public class Colecciones {
 
 		return m3;
 	}
+
+	static int valorMenosRepetido(Map<String, Integer> mapa) {
+		Map<Integer, Integer> frecuenciaEdad = new HashMap<>();
+		for (Integer n : mapa.values()) {
+			if (frecuenciaEdad.containsKey(n))
+				frecuenciaEdad.put(n, frecuenciaEdad.get(n) + 1);
+			else
+				frecuenciaEdad.put(n, 1);
+		}
+		int repeticiones = mapa.size();
+		PriorityQueue<Integer> edad = new PriorityQueue<>();
+
+		Iterator<Entry<Integer, Integer>> iter = frecuenciaEdad.entrySet().iterator();
+
+		while (iter.hasNext()) {
+			Entry<Integer, Integer> e = iter.next();
+			if (e.getValue() < repeticiones) {
+				edad.clear();
+				edad.add(e.getKey());
+				repeticiones = e.getValue();
+			}
+		}
+		return edad.peek();
+	}
+
 }
