@@ -140,4 +140,17 @@ public class Colecciones {
 		return (int) l1.stream().distinct().count();
 	}
 
+	static Map<String, Integer> cuentaPares(List<String> lista) {
+		Map<String, Integer> pares = new TreeMap<>();
+		for (String s : lista) {
+			for (int i = 0; i < s.length() - 1; i++) {
+				String par = s.substring(i, i + 2);
+				if (pares.containsKey(par))
+					pares.put(par, pares.get(par) + 1);
+				else
+					pares.put(par, 1);
+			}
+		}
+		return pares;
+	}
 }
