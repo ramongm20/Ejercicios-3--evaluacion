@@ -1,7 +1,10 @@
 package unidad8.ficheros;
 
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
@@ -18,12 +21,13 @@ public class Ejercicio3 {
 		}
 		else
 			file = new File(args[0]);
-		
+
+		int contCaracteres = 0;
+		int contPalabras = 0;
+		int contLineas = 0;
+		String line;
+
 		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-			int contCaracteres = 0;
-			int contPalabras = 0;
-			int contLineas = 0;
-			String line;
 			while ((line = br.readLine()) != null) {
 				contLineas++;
 				for (String palabra : line.split("\\P{L}+")) {
@@ -31,10 +35,15 @@ public class Ejercicio3 {
 					contCaracteres += palabra.length();
 				}
 			}
-			System.out.println("Número de caracteres: " + contCaracteres);
-			System.out.println("Número de palabras: " + contPalabras);
-			System.out.println("Número de líneas: " + contLineas);
 		} catch (IOException e) {}
+		
+		try (DataOutputStream out = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(file.getAbsolutePath()+"bin", true)))) {
+			out.writeUTF(file.getAbsolutePath());
+			out.writeInt(contCaracteres);
+			out.writeInt(contPalabras);
+			out.writeInt(contLineas);
+		} catch (IOException e) {}
+		System.out.println("Hecho.");
 	}
 
 }
