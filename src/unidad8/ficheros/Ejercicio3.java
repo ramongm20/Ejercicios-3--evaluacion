@@ -37,7 +37,7 @@ public class Ejercicio3 {
 			}
 		} catch (IOException e) {}
 		
-		try (DataOutputStream out = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(file.getAbsolutePath()+"bin", true)))) {
+		try (DataOutputStream out = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(file.getAbsolutePath()+".bin", true)))) {
 			out.writeUTF(file.getAbsolutePath());
 			out.writeInt(contCaracteres);
 			out.writeInt(contPalabras);
