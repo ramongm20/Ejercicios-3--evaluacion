@@ -1,9 +1,9 @@
 package unidad8.ficheros;
 
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
+import java.io.Reader;
 
 public class Ejercicio2 {
 
@@ -14,11 +14,11 @@ public class Ejercicio2 {
 	}
 
 	static long leer(String path, boolean buffer) throws IOException {
-		InputStream in = null;
+		Reader in = null;
 		try {
-			in = new FileInputStream(path);
+			in = new FileReader(path);
 			if (buffer)
-				in = new BufferedInputStream(in);
+				in = new BufferedReader(in);
 			long t0 = System.nanoTime();
 			while (in.read() != -1);
 			return System.nanoTime() - t0;
